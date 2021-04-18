@@ -1,1 +1,1 @@
-web: gunicorn hillel_post.wsgi --log-file -
+web: gunicorn hillel_lesson.wsgi --log-file -
