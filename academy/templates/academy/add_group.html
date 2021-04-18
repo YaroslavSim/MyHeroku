@@ -1,0 +1,17 @@
+{% extends 'academy/base.html' %}
+
+{% block title %}
+    New Group
+{% endblock %}
+
+{% block content %}
+    {% if new_group %}
+        <b> Your group has been added.</b>
+    {% else %}
+        <form method="post">
+            {{ group_form.as_p }}
+            {% csrf_token %}
+            <p><input type='submit' value='Add group'></p>
+        </form>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,51 @@
+<!-- {% now "jS F Y H:i" %} -->
+<!DOCTYPE html>
+{% load static %}
+{% load cache %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'academy/styles.css' %}">
+    <title>{% block title %}Academy{% endblock %}</title>
+</head>
+
+<body>
+    {% cache 300 header %}
+    <!-- {% now "jS F Y H:i" %} -->
+        <div class="navbar navbar-dark header-blue shadow-sm mb-1">
+            <div class="container">
+                <span style="color: white; letter-spacing:3px; text-decoration:underline; text-shadow:4px 4px 8px blue; font-weight: bold; font-size: 20pt; font-family: URW Chancery L, cursive;">Academy Post:)</span>
+            </div>
+        </div>
+    {% endcache %}
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <div class="d-grid gap-1 col-10 mx-auto text-center">
+                    <a href="{% url 'view_student' %}"><button class="btn btn-primary" type="button">View students</button></a>
+                    <a href="{% url 'view_lecturer' %}"><button class="btn btn-primary" type="button">View lecturers</button></a>
+                    <a href="{% url 'view_group' %}"><button class="btn btn-primary" type="button">View groups</button></a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'add_group' %}"><button class="btn btn-primary" type="button">Add group</button></a>
+                        <a href="{% url 'edit_students' %}"><button class="btn btn-primary" type="button">Edit students</button></a>
+                        <a href="{% url 'edit_lecturers' %}"><button class="btn btn-primary" type="button">Edit lecturers</button></a>
+                        <a href="{% url 'edit_groups' %}"><button class="btn btn-primary" type="button">Edit groups</button></a>
+                    {% endif %}
+                    <a href="{% url 'contact' %}"><button class="btn btn-primary" type="button">Sent Contact Us</button></a>
+                    <a href="{% url 'view_contact_message' %}"><button class="btn btn-primary" type="button">View contact message</button></a>
+                    <a href="{% url 'view_exchange_rate' %}"><button class="btn btn-primary" type="button">View exchange rate</button></a>
+                </div>
+            </div>
+            <div class="col-10">
+                <div>
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
